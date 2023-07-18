@@ -44,4 +44,23 @@ const getDetailSubCategory = (req, res, next) => {
       console.log(err);
     });
 };
-module.exports = { getAllSubCategory, createSubCategory, getDetailSubCategory };
+
+const getSubCategoryByCategory = (req, res, next) => {
+  const { categoryId } = req.params;
+  SubCategoryModel.find({
+    categoryId: categoryId,
+  })
+    .populate("categoryId")
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+module.exports = {
+  getAllSubCategory,
+  createSubCategory,
+  getDetailSubCategory,
+  getSubCategoryByCategory,
+};

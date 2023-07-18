@@ -16,6 +16,18 @@ const getAllArticle = (req, res, next) => {
     });
 };
 
+const updateArticle = (req, res, next) => {
+  const { _id } = req.params;
+
+  ArticleModel.findByIdAndUpdate(_id, req.body, { new: true })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      res.status(500).json("Loi server");
+    });
+};
+
 const createArticle = (req, res, next) => {
   var name = req.body.articleName;
   ArticleModel.findOne({
@@ -100,4 +112,5 @@ module.exports = {
   getDetailArticle,
   getArticleById,
   getArtBySubCategoryId,
+  updateArticle,
 };
