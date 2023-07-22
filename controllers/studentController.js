@@ -7,7 +7,7 @@ const getAllStudent = (req, res, next) => {
       res.json(data);
     })
     .catch((error) => {
-      res.status(500).json("Loi server");
+      res.status(500).json({ error: "Loi server" });
     });
 };
 
@@ -18,16 +18,16 @@ const createStudent = (req, res, next) => {
   })
     .then((data) => {
       if (data) {
-        res.json("Student nay da ton tai");
+        res.status(400).json({ error: "Student nay da ton tai" });
       } else {
         return StudentModel.create({ name: name });
       }
     })
     .then((data) => {
-      res.json("Tao tai khoan thanh cong");
+      res.json(data);
     })
     .catch((err) => {
-      res.status(500).json("Tao tai khoan that bai");
+      res.status(500).json({ error: "Tao tai khoan that bai" });
     });
 };
 

@@ -7,7 +7,19 @@ const getAllCategory = (req, res, next) => {
       res.json(data);
     })
     .catch((error) => {
-      res.status(500).json("Loi server");
+      res.status(500).json({ error: "Loi server" });
+    });
+};
+
+const updateCategory = (req, res, next) => {
+  const { _id } = req.params;
+
+  CategoryModel.findByIdAndUpdate(_id, req.body, { new: true })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      res.status(500).json({ error: "Loi server" });
     });
 };
 
@@ -18,17 +30,17 @@ const createCategory = (req, res, next) => {
   })
     .then((data) => {
       if (data) {
-        res.json("category nay da ton tai");
+        res.status(400).json({ error: "Category nay da ton tai" });
       } else {
         return CategoryModel.create({ categoryName: categoryName });
       }
     })
     .then((data) => {
-      res.json("Tao category thanh cong");
+      res.json(data);
     })
     .catch((err) => {
-      res.status(500).json("Tao category that bai");
+      res.status(500).json({ error: "Tao category that bai" });
     });
 };
 
-module.exports = { getAllCategory, createCategory };
+module.exports = { getAllCategory, createCategory, updateCategory };
