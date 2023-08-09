@@ -5,6 +5,7 @@ const ArticleSchema = new mongoose.Schema(
     articleName: { type: String, maxlength: 1600, default: "" },
     tittle: { type: String },
     header: { type: String },
+    content: { type: String },
     content1: { type: String },
     content2: { type: String },
     authorId: {
